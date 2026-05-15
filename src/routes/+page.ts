@@ -5,6 +5,24 @@ type Project = ComponentProps<typeof PortfolioBlock>['project'];
 
 export const prerender = true;
 
+interface Author {
+    name: string;
+    profession: string;
+    bio: string;
+    location: string;
+    contacts: {
+        telegram?: string;
+        email?: string;
+    };
+    media: {
+        photo?: `/${string}`;
+        video?: {
+            provider: string;
+            id: string;
+        };
+    };
+}
+
 export async function load() {
     // 1. Получаем модули кейсов
     const caseModules = import.meta.glob('$lib/content/cases/*.json', { eager: true });
@@ -22,10 +40,11 @@ export async function load() {
 
     // Данные автора (импортируем напрямую)
     const authorModule = await import('$lib/content/author.json');
+    const author = authorModule.default as Author;
 
     return { 
         cases: sortedCases,
         reviews: reviews,
-        author: authorModule.default
+        author
     }
 }

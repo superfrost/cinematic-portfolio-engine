@@ -4,7 +4,6 @@
     import ReviewBlock from '$lib/components/ReviewBlock.svelte';
 
     let { data } = $props();
-    const { author } = data;
 
     // Состояние поиска
     let searchQuery = $state("");
@@ -84,31 +83,31 @@
                 <div class="flex flex-col gap-6 w-full">
                     
                     <!-- Условие на ФОТО -->
-                    {#if author.media.photo}
+                    {#if data.author.media?.photo}
                         <div class="w-full bg-neutral-800 rounded-2xl overflow-hidden shadow-2xl border border-neutral-800 group">
                             <img 
-                                src={resolve(author.media.photo)} 
-                                alt={author.name} 
+                            src={resolve(data.author.media.photo as `/#${string}`)} 
+                                alt={data.author.name} 
                                 class="w-full h-auto grayscale contract-125 filter group-hover:grayscale-0 transition-all duration-700"
                             />
                         </div>
                     {/if}
 
                     <!-- Условие на ВИДЕО -->
-                    {#if author.media.video}
+                    {#if data.author.media.video}
                         <div class="aspect-video bg-neutral-950 rounded-2xl overflow-hidden border border-neutral-800 shadow-lg w-full">
                             <iframe 
                                 class="w-full h-full border-0" 
-                                src={author.media.video.provider === 'youtube' 
-                                    ? `https://www.youtube.com/embed/${author.media.video.id}` 
-                                    : `https://rutube.ru/play/embed/${author.media.video.id}`} 
+                                src={data.author.media.video.provider === 'youtube' 
+                                    ? `https://www.youtube.com/embed/${data.author.media.video.id}` 
+                                    : `https://rutube.ru/play/embed/${data.author.media.video.id}`} 
                                 title="Author showreel" 
                                 allowfullscreen
                             ></iframe>
                         </div>
                     {/if}
 
-                    {#if !author.media.photo && !author.media.video}
+                    {#if !data.author.media.photo && !data.author.media.video}
                         <div class="p-12 border-2 border-dashed border-neutral-800 rounded-2xl text-neutral-600 text-center">
                             Медиа-контент не указан
                         </div>
@@ -118,37 +117,37 @@
                 <!-- ПРАВАЯ КОЛОНКА: Динамические данные автора -->
                 <div class="flex flex-col justify-center sticky top-24">
                     <span class="text-xs uppercase tracking-widest text-amber-500 font-semibold mb-3 block">
-                        {author.profession}
+                        {data.author.profession}
                     </span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-100 mb-6">
-                        {author.name}
+                        {data.author.name}
                     </h2>
                     <p class="text-neutral-400 font-light text-base md:text-lg leading-relaxed mb-8">
-                        {author.bio}
+                        {data.author.bio}
                     </p>
 
                     <div class="space-y-4 border-t border-neutral-800 pt-6 font-light">
-                        {#if author.contacts.telegram}
+                        {#if data.author.contacts.telegram}
                             <div class="flex justify-between py-2 border-b border-neutral-900">
                                 <span class="text-neutral-500 text-sm">Telegram:</span>
-                                <a href="https://t.me/{author.contacts.telegram.replace('@', '')}" class="hover:text-amber-500 transition-colors">
-                                    {author.contacts.telegram}
+                                <a href="https://t.me/{data.author.contacts.telegram.replace('@', '')}" class="hover:text-amber-500 transition-colors">
+                                    {data.author.contacts.telegram}
                                 </a>
                             </div>
                         {/if}
                         
-                        {#if author.contacts.email}
+                        {#if data.author.contacts.email}
                             <div class="flex justify-between py-2 border-b border-neutral-900">
                                 <span class="text-neutral-500 text-sm">Email:</span>
-                                <a href="mailto:{author.contacts.email}" class="hover:text-amber-500 transition-colors">
-                                    {author.contacts.email}
+                                <a href="mailto:{data.author.contacts.email}" class="hover:text-amber-500 transition-colors">
+                                    {data.author.contacts.email}
                                 </a>
                             </div>
                         {/if}
 
                         <div class="flex justify-between py-2 border-b border-neutral-900">
                             <span class="text-neutral-500 text-sm">Локация:</span>
-                            <span class="text-neutral-300">{author.location}</span>
+                            <span class="text-neutral-300">{data.author.location}</span>
                         </div>
                     </div>
                 </div>
