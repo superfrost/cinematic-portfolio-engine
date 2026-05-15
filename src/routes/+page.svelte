@@ -35,7 +35,9 @@
             </span>
 
             <div class="relative w-full max-w-[120px] xs:max-w-[180px] md:max-w-md">
+                <label for="search-input" class="sr-only">Поиск проектов</label>
                 <input
+                    id="search-input"
                     type="text"
                     bind:value={searchQuery}
                     placeholder="Поиск..."

@@ -88,6 +88,18 @@
     }
 
     $effect(() => {
+        const el = sliderElement;
+        if (!el) return;
+        const handler = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); stopAutoplayForever(); nextSlide(); }
+        };
+        el.addEventListener('keydown', handler);
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+        return () => el.removeEventListener('keydown', handler);
+    });
+
+    $effect(() => {
         autoplayInterval = setInterval(() => {
             if (!autoplayDestroyed && project.items.length > 1) {
                 autoplayNextSlide();
@@ -138,7 +150,8 @@
             bind:this={sliderElement}
             onscroll={handleScroll}
             onscrollend={handleScrollEnd}
-            class="w-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar scrollbar-none"
+            role="group"
+            class="w-full flex overflow-x-auto snap-x snap-mandatory scrollbar-none"
         >
             {#each project.items as item}
                 <div class="w-full flex-shrink-0 snap-start snap-always flex justify-center px-4">
@@ -177,11 +190,13 @@
     .scrollbar-none::-webkit-scrollbar {
         display: none;
     }
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-    }
-    .animate-bounce {
-        animation: bounce 0.5s ease-in-out infinite;
+    @media (prefers-reduced-motion: no-preference) {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce {
+            animation: bounce 0.5s ease-in-out infinite;
+        }
     }
 </style>
