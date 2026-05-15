@@ -13,9 +13,9 @@ const config = {
             strict: true
         }),
         paths: {
-            // Если твой сайт будет лежать по адресу https://username.github.io/portfolio-repo/,
+            // Если твой сайт будет лежать по адресу https://username.github.io/cinematic-portfolio-engine/,
             // то здесь должно быть указано имя репозитория:
-            base: process.env.NODE_ENV === 'production' ? '/portfolio-repo' : ''
+            base: process.env.NODE_ENV === 'production' ? '/cinematic-portfolio-engine' : ''
         }
     }
 };
