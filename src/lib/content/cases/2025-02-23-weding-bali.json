@@ -3,7 +3,7 @@
     "title": "Свадьба на Бали: Олег и Алена",
     "description": "Эмоциональный репортажный ролик, снятый на закате. Использовали анаморфную оптику для кинематографичной картинки. Локация: Улувату.",
     "items": [
-        { "type": "video", "provider": "youtube", "id": "loWq_wnbDQY" },
+        { "type": "video", "provider": "rutube", "id": "a5a944095a5b68517005c27ef91e8b5b" },
         { "type": "image", "src": "https://www.sunhome.ru/i/wallpapers/214/svadba-na-more.xxl.jpg" },
         { "type": "text", "content": "Команда: 2 оператора, 1 дроновод. Световой сетап: только естественный свет + отражатели на банкете." }
     ]

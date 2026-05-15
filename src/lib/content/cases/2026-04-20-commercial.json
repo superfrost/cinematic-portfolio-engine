@@ -1,0 +1,9 @@
+{
+    "id": "2026-04-20-commercial",
+    "title": "Бодибилдинг",
+    "description": "Динамичный монтаж, агрессивный саунд-дизайн. Задача была показать нарезки видео для соц сетей.",
+    "items": [
+        { "type": "video", "provider": "rutube", "id": "35c977fb97a3ba5314f0ca7b945943c1" },
+        { "type": "image", "src": "https://jornalismojunior.com.br/wp-content/webp-express/webp-images/uploads/2024/10/unnamed-1.png.webp" }
+    ]
+}

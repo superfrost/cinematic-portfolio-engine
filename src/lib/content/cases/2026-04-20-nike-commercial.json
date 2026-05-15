@@ -1,9 +1,0 @@
-{
-    "id": "2026-04-20-nike-commercial",
-    "title": "Nike Run — Рекламный промо-ролик",
-    "description": "Динамичный монтаж, агрессивный саунд-дизайн. Задача была показать текстуру кроссовок в движении и передать ритм городского бега.",
-    "items": [
-        { "type": "video", "provider": "youtube", "id": "RdJ9vKje2J4" },
-        { "type": "image", "src": "https://static.nike.com/a/images/f_auto/dpr_1.5,cs_srgb/h_2777,c_limit/87db1b5e-aaed-4da7-8873-7a4883b38c38/men-s-shoes-clothing-accessories.jpg" }
-    ]
-}
