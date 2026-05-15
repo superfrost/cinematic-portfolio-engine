@@ -1,50 +1,24 @@
-import type { ComponentProps } from 'svelte';
-import PortfolioBlock from '$lib/components/PortfolioBlock.svelte';
-
-type Project = ComponentProps<typeof PortfolioBlock>['project'];
+import type { Project, Review, Author } from '$lib/types';
 
 export const prerender = true;
 
-interface Author {
-    name: string;
-    profession: string;
-    bio: string;
-    location: string;
-    contacts: {
-        telegram?: string;
-        email?: string;
-    };
-    media: {
-        photo?: `/${string}`;
-        video?: {
-            provider: string;
-            id: string;
-        };
-    };
-}
-
 export async function load() {
-    // 1. Получаем модули кейсов
-    const caseModules = import.meta.glob('$lib/content/cases/*.json', { eager: true });
-    
-    // 2. Получаем пути к файлам и сортируем их по алфавиту (от А до Я)
-    // Затем разворачиваем (reverse), чтобы последние даты (2026...) были первыми
+    const caseModules = import.meta.glob<{ default: Project }>('$lib/content/cases/*.json', { eager: true });
+
     const sortedCases = Object.keys(caseModules)
         .sort()
         .reverse()
-        .map((path) => (caseModules[path] as any).default);
+        .map(path => caseModules[path].default);
 
-    // 3. То же самое для отзывов (если там важен порядок)
-    const reviewModules = import.meta.glob('$lib/content/reviews/*.json', { eager: true });
-    const reviews = Object.values(reviewModules).map(m => (m as any).default);
+    const reviewModules = import.meta.glob<{ default: Review }>('$lib/content/reviews/*.json', { eager: true });
+    const reviews = Object.values(reviewModules).map(m => m.default);
 
-    // Данные автора (импортируем напрямую)
     const authorModule = await import('$lib/content/author.json');
     const author = authorModule.default as Author;
 
-    return { 
+    return {
         cases: sortedCases,
-        reviews: reviews,
+        reviews,
         author
     }
 }
